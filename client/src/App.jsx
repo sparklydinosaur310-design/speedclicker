@@ -42,7 +42,7 @@ export default function App() {
       TEST SERVER
       </button>
       <button onClick={() => supabase.auth.signOut()}>LOG OUT</button>
-      <p>{profile?.profile ? `Player: ${profile.profile.username}` : 'Loading profile...'}</p>
+      <p>{profile?.profile ? `Player: ${profile.profile.username}` : profile?.error || 'Loading profile...'}</p>
     </div>
   );
 }
