@@ -1,5 +1,5 @@
-import { UseState } from 'react';
-import { supabase } from '../api/supabase';
+import { useState } from 'react';
+import { supabase } from '../api/supabase.js';
 import './Login.css';
 
 export default function Login() {
@@ -33,7 +33,7 @@ export default function Login() {
             <h1 className="login-title">SPEEDCLICKER</h1>
             <form className="login-card" onSubmit={handleSubmit}>
                 {mode === 'signup' && (
-                    <imput
+                    <input
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -42,14 +42,14 @@ export default function Login() {
                     required
                     />
                 )}
-                <imput
+                <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 />
-                <imput
+                <input
                 type="password"
                 placeholder="Password (6+ characters)"
                 value={password}
@@ -59,14 +59,17 @@ export default function Login() {
                 />
                 {error && <p className="login-error">{error}</p>}
                 <button type="submit" disabled={busy}>
-                    {busy ? '...' : mode === 'signup' ? 'SIGN UP' : 'LOG IN'}
+                    {busy ? '...' : mode === 'signup' ? 'SIGN IN' : 'LOG IN'}
                 </button>
                 <button
                     type="button"
                     className="login-switch"
-                    onClick={() => setMode(mode === 'log in' ? 'sign up' : 'log in')}
+                    onClick={() => {
+                        setMode(mode === 'login' ? 'signup' : 'login');
+                        setError('');
+                    }}
                     >
-                    {mode === 'signup' ? 'New here? Sign up' : "Already have an account? Log in"}
+                        {mode === 'login' ? "Don't have an account? Sign in" : 'Already have an account? Log in'}
                     </button>
             </form>
         </div>
