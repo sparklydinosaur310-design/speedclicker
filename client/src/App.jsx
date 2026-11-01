@@ -7,6 +7,7 @@ export default function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [apiResult, setApiResult] = useState('');
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -20,6 +21,14 @@ export default function App() {
     
     return() => listener.subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (!session) {
+      setProfile(null);
+      return;
+    }
+    apiFetch('/api/profile', { method: 'POST' }).then((data) => setProfile(data));
+  }, [session]);
 
   if (loading) return <h1>LOADING...</h1>;
   if (!session) return <Login />;

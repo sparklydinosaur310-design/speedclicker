@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { supabase } from './db/supabase.js';
+import profileRoutes from './routes/profile.js';
 
 const app = express();
 app.use(cors({ origin: process.env.CLIENT_ORIGIN }));
