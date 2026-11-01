@@ -38,11 +38,12 @@ export default function App() {
   return (
     <div style={{padding:24}}>
       <h1>Logged in as {session.user.email}</h1>
+      <p>{profile?.profile ? `Player: ${profile.profile.username}` : profile?.error || 'Loading profile...'}</p>
       <button onClick={async () => setApiResult(JSON.stringify(await apiFetch('/api/me')))}>
       TEST SERVER
       </button>
       <button onClick={() => supabase.auth.signOut()}>LOG OUT</button>
-      <p>{profile?.profile ? `Player: ${profile.profile.username}` : profile?.error || 'Loading profile...'}</p>
+      <p>{apiResult}</p>
     </div>
   );
 }
