@@ -10,7 +10,6 @@ export async function requireAuth(req, res, next) {
 
     const { data, error } = await supabase.auth.getUser(token);
     if (error || !data.user) {
-        console.log('Auth check failed:', error?.message);
         return res.status(401).json({ error: 'Invalid token' });
     }
 

@@ -1,0 +1,110 @@
+{
+    "size": 16,
+    "palette": { "k": "#1b1b2f", "e": "#111111", "r": "#ee4266", "c": "#3b82f6" },
+    "skinColors": ["#ffdbac", "#f1c27d", "#c68642", "#8d5524"],
+    "hairColors": ["#2b1b0e", "#6b3e1e", "#e0b040", "#d1d1d1", "#ee4266", "#3b82f6"],
+    "outfitColors": ["#ee4266", "#3b82f6", "#2ecc71", "#ffd23f", "#9b59b6", "#ffffff"],
+    "body": {
+        "y": 0,
+        "rows": [
+            "................",
+            "................",
+            "......kkkk......",
+            ".....kssssk.....",
+            ".....kessek.....",
+            ".....kssssk.....",
+            ".....kssssk.....",
+            "......kkkk......",
+            "...ssssssssss...",
+            "...ssssssssss...",
+            "...ssssssssss...",
+            "...ssssssssss...",
+            "....ssssssss....",
+            "....sss..sss....",
+            "....sss..sss....",
+            "....kkk..kkk...."
+        ]
+    },
+    "hair": {
+        "bald": { "y": 0, "rows": [] },
+        "short": {
+            "y": 1,
+            "rows": [
+                "......hhhh......",
+                ".....hhhhhh.....",
+                ".....hhhhhh.....",
+                ".....h....h....."
+            ]
+        },
+        "spiky": {
+            "y": 0,
+            "rows": [
+                ".....h.hh.h.....",
+                "......hhhh......",
+                ".....hhhhhh.....",
+                ".....hhhhhh.....",
+                ".....h....h....."
+            ]
+        },
+        "long": {
+            "y": 1,
+            "rows": [
+                "......hhhh......",
+                ".....hhhhhh.....",
+                ".....hhhhhh.....",
+                ".....h....h.....",
+                ".....h....h.....",
+                ".....h....h.....",
+                ".....h....h....."
+            ]
+        }
+    },
+    "outfit": {
+        "tee": {
+            "y": 8,
+            "rows": [
+                "...oooooooooo...",
+                "...oooooooooo...",
+                "....oooooooo....",
+                "....oooooooo....",
+                "....oooooooo....",
+                "....ooo..ooo...."
+            ]
+        },
+        "hoodie": {
+            "y": 8,
+            "rows": [
+                "...oooooooooo...",
+                "...oooooooooo...",
+                "...oooooooooo...",
+                "...oooooooooo...",
+                "....oooooooo....",
+                "....ooo..ooo....",
+                "....ooo..ooo...."
+            ]
+        },
+        "tank": {
+            "y": 8,
+            "rows": [
+                "....o.oooo.o....",
+                "....oooooooo....",
+                "....oooooooo....",
+                "....oooooooo....",
+                "....oooooooo...."
+            ]
+        }
+    },
+    "accessory": {
+        "none": { "y": 0, "rows": [] },
+        "headband": { "y": 3, "rows": [".....rrrrrr....."] },
+        "shades": { "y": 4, "rows": [".....kkkkkk....."] },
+        "cap": {
+            "y": 1,
+            "rows": [
+                "......cccc......",
+                ".....cccccc.....",
+                "....cccccccc...."
+            ]
+        }
+    }
+}
