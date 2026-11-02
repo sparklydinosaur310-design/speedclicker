@@ -4,12 +4,14 @@ import { apiFetch } from './api/api.js';
 import Login from './screens/Login.jsx';
 import AvatarCreator from './screens/AvatarCreator.jsx';
 import PixelSprite from './components/PixelSprite.jsx'
+import SettingsMenu from './components/SettingsMenu.jsx';
 
 export default function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [apiResult, setApiResult] = useState('');
   const [profile, setProfile] = useState(null);
+  const [screen, setScreen] = useState('main');
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -38,12 +40,15 @@ export default function App() {
   if (profile.error) return <h1>{profile.error}</h1>;
 
   const hasAvatar = Object.keys(profile.profile.avatar || {}).length > 0;
-  if (!hasAvatar) {
+  if (!hasAvatar || screen === 'avatar') {
     return (
       <AvatarCreator
-      onSaved={(avatar) =>
-        setProfile({ ...profile, profile: { ...profile.profile, avatar } })
-      }
+      initial={profile.profile.avatar}
+      onCancel={hasAvatar ? () => setScreen('main') : undefined}
+      onSaved={(avatar) => {
+        setProfile({ ...profile, profile: { ...profile.profile, avatar } });
+        setScreen('main');
+      }}
       />
     );
   }
@@ -51,6 +56,10 @@ export default function App() {
   //temporary test screen
   return (
     <div style={{padding:24}}>
+      <SettingsMenu
+      onChangeAvatar={() => setScreen('avatar')}
+      onLogout={() => supabase.auth.signOut()}
+      />
       <h1>Logged in as {session.user.email}</h1>
       <p>{profile?.profile ? `Player: ${profile.profile.username}` : profile?.error || 'Loading profile...'}</p>
       <PixelSprite avatar={profile.profile.avatar} scale={12} />

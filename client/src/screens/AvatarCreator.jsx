@@ -45,8 +45,9 @@ function Swatches({ colors, value, onPick }) {
     );
 }
 
-export default function AvatarCreator({ initial, onSaved }) {
+export default function AvatarCreator({ initial, onSaved, onCancel }) {
     const hasInitial = initial && Object.keys(initial).length > 0;
+    const editing = hasInitial;
     const [avatar, setAvatar] = useState(hasInitial ? initial : DEFAULT_AVATAR);
     const [error, setError] = useState('');
     const [busy, setBusy] = useState(false);
@@ -70,7 +71,7 @@ export default function AvatarCreator({ initial, onSaved }) {
 
     return (
         <div className="creator">
-            <h1 className="creator-title">MAKE YOUR RUNNER</h1>
+            <h1 className="creator-title">{editing ? 'CHANGE YOUR RUNNER' : 'MAKE YOUR RUNNER'}</h1>
             <div className="creator-card">
                 <PixelSprite avatar={avatar} scale={12} />
 
@@ -87,7 +88,12 @@ export default function AvatarCreator({ initial, onSaved }) {
             
                 {error &&  <p className="creator-error">{error}</p>}
                 <button type="button" className="creator-next" onClick={handleNext} disabled={busy}>
-                {busy ? '...' : 'NEXT'}
+                    {onCancel && (
+                        <button type="button" className="creator-next" onClick={onCancel}>
+                            CANCEL
+                            </button>
+                    )}
+                {busy ? '...' : editing ? 'SAVE' : 'NEXT'}
                 </button>
             </div>
         </div>
