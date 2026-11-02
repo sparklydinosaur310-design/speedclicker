@@ -4,6 +4,7 @@ import data from '../../../shared/data/avatar.json';
 function drawLayer(ctx, layer, colors, scale) {
     layer.rows.forEach((row, i) => {
         [...row].forEach((ch, x) => {
+            if (ch === '.') return
             ctx.fillStyle = colors[ch];
             ctx.fillRect(x * scale, (layer.y + i) * scale, scale, scale);
         });
@@ -20,8 +21,8 @@ export default function PixelSprite({ avatar, scale = 10 }) {
         const colors = {
             ...data.palette,
             s: data.skinColors[avatar.skin],
-            h: data.hairColors[avatar.hairColors],
-            o: data.outfitColors[avatar.outfitColors],
+            h: data.hairColors[avatar.hairColor],
+            o: data.outfitColors[avatar.outfitColor],
         };
 
         [

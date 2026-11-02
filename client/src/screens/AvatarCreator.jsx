@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PixelSprite from '../components/PixelSpritee.jsx';
+import PixelSprite from '../components/PixelSprite.jsx';
 import { apiFetch } from '../api/api.js';
 import data from '../../../shared/data/avatar.json';
 import './AvatarCreator.css';
@@ -7,7 +7,7 @@ import './AvatarCreator.css';
 const DEFAULT_AVATAR = {
     skin: 0,
     hair: 'short',
-    haircolor: 0,
+    hairColor: 0,
     outfit: 'tee',
     outfitColor: 0,
     accessory: 'none',
@@ -18,13 +18,13 @@ function cycle(list, current, step) {
     return list[(i + step + list.length) % list.length];
 }
 
-function Picker({ label, options, value, Onchange }) {
+function Picker({ label, options, value, onChange }) {
     return (
         <div className="picker">
             <span className="picker-label">{label}</span>
-            <buton type="button" onClick={() => onChange(cycle(options, value, -1))}>&lt;</buton>
+            <button type="button" onClick={() => onChange(cycle(options, value, -1))}>&lt;</button>
             <span className="picker-value">{value}</span>
-            <button type="button" onClick={() => onChange(cycle(options, value, -1))}>&gt;</button>
+            <button type="button" onClick={() => onChange(cycle(options, value, 1))}>&gt;</button>
         </div>
     );
 }
@@ -53,19 +53,20 @@ export default function AvatarCreator({ initial, onSaved }) {
 
     const set = (key, value) => setAvatar({ ...avatar, [key]: value });
 
-    async function handleNext(){
+    async function handleNext() {
         setBusy(true);
         setError('');
         const result = await apiFetch('/api/profile/avatar', {
             method: 'PUT',
             body: JSON.stringify(avatar),
         });
-        if (result.error);
-        setBusy(false);
-        return;
+        if (result.error) {
+            setError(result.error);
+                setBusy(false);
+                return;
+        }
+        onSaved(result.avatar);
     }
-    onSaved(result.avatar);
-}
 
     return (
         <div className="creator">
@@ -91,3 +92,4 @@ export default function AvatarCreator({ initial, onSaved }) {
             </div>
         </div>
     );
+}
