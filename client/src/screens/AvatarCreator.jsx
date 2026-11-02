@@ -88,13 +88,13 @@ export default function AvatarCreator({ initial, onSaved, onCancel }) {
             
                 {error &&  <p className="creator-error">{error}</p>}
                 <button type="button" className="creator-next" onClick={handleNext} disabled={busy}>
-                    {onCancel && (
-                        <button type="button" className="creator-next" onClick={onCancel}>
-                            CANCEL
-                            </button>
-                    )}
                 {busy ? '...' : editing ? 'SAVE' : 'NEXT'}
                 </button>
+                 {onCancel && (
+                        <button type="button" className="creator-next" onClick={onCancel}>
+                            CANCEL
+                        </button>
+                    )}
             </div>
         </div>
     );

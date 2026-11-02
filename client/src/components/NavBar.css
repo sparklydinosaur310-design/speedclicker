@@ -1,0 +1,25 @@
+.nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    background: #16213e;
+    border-top: 4px solid #ffd23f;
+}
+
+.nav button {
+    flex: 1;
+    padding: 16px 0;
+    font-family: inherit;
+    font-size: 1.3rem;
+    cursor: pointer;
+    background: transparent;
+    color: #fff;
+    border: none;
+}
+
+.nav button.on {
+    background: #ee4266;
+}

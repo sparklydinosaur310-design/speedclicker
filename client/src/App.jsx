@@ -3,15 +3,17 @@ import { supabase } from './api/supabase.js';
 import { apiFetch } from './api/api.js';
 import Login from './screens/Login.jsx';
 import AvatarCreator from './screens/AvatarCreator.jsx';
-import PixelSprite from './components/PixelSprite.jsx'
 import SettingsMenu from './components/SettingsMenu.jsx';
+import Main from './screens/Main.jsx';
+import NavBar from './components/NavBar.jsx';
+import { useGame } from './game/useGame.js';
 
 export default function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [apiResult, setApiResult] = useState('');
   const [profile, setProfile] = useState(null);
   const [screen, setScreen] = useState('main');
+  const game = useGame();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -53,21 +55,25 @@ export default function App() {
     );
   }
 
-  //temporary test screen
   return (
-    <div style={{padding:24}}>
+    <>
       <SettingsMenu
-      onChangeAvatar={() => setScreen('avatar')}
-      onLogout={() => supabase.auth.signOut()}
+        onChangeAvatar={() => setScreen('avatar')}
+        onLogout={() => supabase.auth.signOut()}
       />
-      <h1>Logged in as {session.user.email}</h1>
-      <p>{profile?.profile ? `Player: ${profile.profile.username}` : profile?.error || 'Loading profile...'}</p>
-      <PixelSprite avatar={profile.profile.avatar} scale={12} />
-      <button onClick={async () => setApiResult(JSON.stringify(await apiFetch('/api/me')))}>
-      TEST SERVER
-      </button>
-      <button onClick={() => supabase.auth.signOut()}>LOG OUT</button>
-      <p>{apiResult}</p>
-    </div>
-  );
-}
+
+      {screen === 'main' && (
+        <Main
+        avatar={profile.profile.avatar}
+        speed={game.speed}
+        perClick={game.perClick}
+        perSecond={game.perSecond}
+        onRun={game.run}
+        />
+      )}
+      {screen === 'achievements' && <h1 style={{ padding: '90px 24px' }}>ACHIEVEMENTS</h1>}
+      {screen === 'challenge' && <h1 style={{ padding: '90px 24px' }}>CHALLENGE</h1>}
+
+      <NavBar screen={screen} onChange={setScreen} />
+      </>
+  )};
