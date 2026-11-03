@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PixelSprite from '../components/PixelSprite';
 import Shop from '../components/Shop.jsx';
 import './Main.css';
 
-export default function Main({ avatar, speed, perClick, levels, onRun, onBuy }) {
+export default function Main({ avatar, speed, perClick, perSecond, levels, onRun, onBuy }) {
     const [pops, setPops] = useState([]);
+
+    function addPop(amount, passive) {
+        const id = Math.random();
+        const left = passive ? 70 + Math.random() * 25 : 30 + Math.random() * 40;
+        setPops((p) => [...p, { id, left, amount, passive }]);
+        setTimeout(() => setPops((p) => p.filter((x) => x.id !== id)), 800);
+    }
 
     function handleRun() {
         onRun();
-        const id = Math.random() * 40;
-        const left = 30 + Math.random() * 40;
-        setPops((p) => [...p, { id, left, }]);
-        setTimeout(() => setPops((p) => p.filter((x) => x.id !== id)), 800);
+        addPop(perClick, false);
     }
+
+    useEffect(() => {
+        if (perSecond <= 0) return;
+        const timer = setInterval(() => addPop(perSecond, true), 1000);
+        return () => clearInterval(timer);
+    }, [perSecond]);
 
     return (
         <div className="main">
@@ -23,8 +33,12 @@ export default function Main({ avatar, speed, perClick, levels, onRun, onBuy }) 
                         <PixelSprite avatar={avatar} scale={20} />
                     </button>
                     {pops.map((p) => (
-                        <span key={p.id} className="pop" style={{ left: `${p.left}%` }}>
-                            +{perClick.toLocaleString()}
+                        <span 
+                            key={p.id}
+                            className={p.passive ? 'pop passive' : 'pop'}
+                            style={{ left: `${p.left}%` }}
+                            >
+                            +{p.amount.toLocaleString()}
                         </span>
                     ))}
                 </div>

@@ -68,6 +68,7 @@ export default function App() {
         speed={game.speed}
         perClick={game.perClick}
         levels={game.levels}
+        perSecond={game.perSecond}
         onRun={game.run}
         onBuy={game.buy}
         />

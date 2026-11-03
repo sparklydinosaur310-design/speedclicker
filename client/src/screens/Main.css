@@ -47,6 +47,11 @@
     animation: pop-up 0.8s ease-out forwards;
 }
 
+.pop.passive {
+    font-size: 1.3rem;
+    color: #fff;
+}
+
 @keyframes pop-up {
     from { opacity: 1; transform: translateY(0); }
     to { opacity: 0; transform: translateY(-80px); }
