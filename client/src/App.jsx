@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase } from './api/supabase.js';
 import { apiFetch } from './api/api.js';
 import Login from './screens/Login.jsx';
@@ -14,6 +14,8 @@ export default function App() {
   const [profile, setProfile] = useState(null);
   const [screen, setScreen] = useState('main');
   const game = useGame();
+  const [loaded, setLoaded] = useState(false);
+  const gameRef = useRef(game);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -31,10 +33,55 @@ export default function App() {
   useEffect(() => {
     if (!session) {
       setProfile(null);
+      setLoaded(false);
+      game.load({ earned: 0, levels: {} });
       return;
     }
     apiFetch('/api/profile', { method: 'POST' }).then((data) => setProfile(data));
   }, [session]);
+  useEffect(() => {
+    gameRef.current = game;
+  });
+
+  useEffect(() => {
+    if (!profile?.profile) return;
+    apiFetch('/api/game').then((save) => {
+      if (save.error) return;
+      game.load(save);
+      setLoaded(true);
+    });
+  }, [profile?.profile?.id]);
+
+  useEffect(() => {
+    if (!loaded) return;
+
+    function save(keepalive) {
+      const g = gameRef.current;
+      apiFetch('/api/game', {
+        method: 'PUT',
+        keepalive,
+        body: JSON.stringify({ earned: Math.floor(g.earned), levels: g.levels }),
+      })
+      .then((res) => {
+        if (!res.error) return;
+        apiFetch('/api/game').then((s) => {
+          if (!s.error) gameRef.current.load(s);
+        });
+      })
+      .catch(() => {});
+    }
+
+    const timer = setInterval(() => save(false), 5000);
+    const onHide = () => {
+      if (document.visibilityState === 'hidden') save(true);
+    };
+
+      document.addEventListener('visibilitychange', onHide);
+      return () => {
+        clearInterval(timer);
+        document.removeEventListener('visibilitychange', onHide);
+      };
+    }, [loaded]);
 
   if (loading) return <h1>LOADING...</h1>;
   if (!session) return <Login />;
@@ -54,7 +101,8 @@ export default function App() {
       />
     );
   }
-
+ 
+  if (!loaded) return <h1>LOADING SAVE...</h1>;
   return (
     <>
       <SettingsMenu
@@ -78,4 +126,5 @@ export default function App() {
 
       <NavBar screen={screen} onChange={setScreen} />
       </>
-  )};
+  );
+}

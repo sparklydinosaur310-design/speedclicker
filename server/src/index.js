@@ -4,6 +4,7 @@ import cors from 'cors';
 import { supabase } from './db/supabase.js';
 import { requireAuth } from './middleware/requireAuth.js';
 import profileRoutes from './routes/profile.js';
+import gameRoutes from './routes/game.js';
 
 const app = express();
 app.use(cors({ origin: process.env.CLIENT_ORIGIN }));
@@ -19,6 +20,7 @@ app.get('/api/me', requireAuth, (req, res) => {
 });
 
 app.use('/api/profile', profileRoutes);
+app.use('/api/game', gameRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
