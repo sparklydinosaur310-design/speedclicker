@@ -1,0 +1,20 @@
+[
+    {
+        "id": "shoes",
+        "name": "RUNNING SHOES",
+        "desc": "+1 PER CLICK",
+        "kind": "click",
+        "baseCost": 15,
+        "growth": 1.15,
+        "gain": 1
+    },
+    {
+        "id": "treadmill",
+        "name": "TREADMILL",
+        "desc": "+1 PER SECOND",
+        "kind": "treadmill",
+        "baseCost": 100,
+        "growth": 1.15,
+        "gain": 1
+    }
+]

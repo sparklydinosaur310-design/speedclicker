@@ -67,8 +67,9 @@ export default function App() {
         avatar={profile.profile.avatar}
         speed={game.speed}
         perClick={game.perClick}
-        perSecond={game.perSecond}
+        levels={game.levels}
         onRun={game.run}
+        onBuy={game.buy}
         />
       )}
       {screen === 'achievements' && <h1 style={{ padding: '90px 24px' }}>ACHIEVEMENTS</h1>}

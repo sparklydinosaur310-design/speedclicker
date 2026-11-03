@@ -1,0 +1,49 @@
+.shop {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-self: flex-start;
+    padding: 16px;
+    background: #16213e;
+    border: 4px solid #ffd23f;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.shop-title {
+    margin: 0;
+    text-align: center;
+    color: #ffd23f;
+}
+
+.shop-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    padding: 10px;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    background: #ee4266;
+    color: #fff;
+    border: 3px solid #000;
+    box-shadow: 3px 3px 0 #000;
+}
+
+.shop-item:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.shop-name {
+    font-size: 1.1rem;
+}
+
+.shop-cost {
+    color: #ffd23f;
+}
+
+.shop-right {
+    text-align: right;
+    font-size: 0.9rem;
+}
