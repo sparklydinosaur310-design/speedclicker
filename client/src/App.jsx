@@ -120,6 +120,7 @@ export default function App() {
         onRun={game.run}
         onBuy={game.buy}
         userId={session.user.Id}
+        earned={game.earned}
         />
       )}
       {screen === 'achievements' && <h1 style={{ padding: '90px 24px' }}>ACHIEVEMENTS</h1>}

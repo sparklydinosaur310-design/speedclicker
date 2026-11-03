@@ -38,3 +38,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.board-you {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 8px;
+    color: #ffd23f;
+    border-top: 3px solid #ffd23f;
+}

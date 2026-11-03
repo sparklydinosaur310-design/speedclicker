@@ -4,7 +4,7 @@ import Shop from '../components/Shop.jsx';
 import Leaderboard from '../components/Leaderboard.jsx';
 import './Main.css';
 
-export default function Main({ avatar, speed, perClick, perSecond, levels, userId, onRun, onBuy }) {
+export default function Main({ avatar, speed, perClick, perSecond, levels, userId, earned, onRun, onBuy }) {
     const [pops, setPops] = useState([]);
 
     function addPop(amount, passive) {
@@ -27,7 +27,7 @@ export default function Main({ avatar, speed, perClick, perSecond, levels, userI
 
     return (
         <div className="main">
-            <Leaderboard userId={userId} />
+            <Leaderboard userId={userId} earned={earned} />
             <div className="main-play">
                 <h1 className="main-speed">{Math.floor(speed).toLocaleString()}</h1>
                 <div className="main-stage">

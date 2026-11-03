@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../api/supabase.js';
 import './Leaderboard.css';
 
-export default function Leaderboard({ userId }) {
+export default function Leaderboard({ userId, earned }) {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -44,6 +44,10 @@ export default function Leaderboard({ userId }) {
                     <span className="board-speed">{Math.floor(row.total_speed).toLocaleString()}</span>
                 </div>
             ))}
+            <div className="board-you">
+                <span>YOUR TOTAL</span>
+                <span>{Math.floor(earned).toLocaleString()}</span>
+            </div>
         </aside>
     );
 }
