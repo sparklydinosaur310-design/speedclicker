@@ -119,6 +119,7 @@ export default function App() {
         perSecond={game.perSecond}
         onRun={game.run}
         onBuy={game.buy}
+        userId={session.user.Id}
         />
       )}
       {screen === 'achievements' && <h1 style={{ padding: '90px 24px' }}>ACHIEVEMENTS</h1>}

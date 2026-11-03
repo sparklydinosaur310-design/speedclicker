@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import PixelSprite from '../components/PixelSprite';
 import Shop from '../components/Shop.jsx';
+import Leaderboard from '../components/Leaderboard.jsx';
 import './Main.css';
 
-export default function Main({ avatar, speed, perClick, perSecond, levels, onRun, onBuy }) {
+export default function Main({ avatar, speed, perClick, perSecond, levels, userId, onRun, onBuy }) {
     const [pops, setPops] = useState([]);
 
     function addPop(amount, passive) {
@@ -26,6 +27,7 @@ export default function Main({ avatar, speed, perClick, perSecond, levels, onRun
 
     return (
         <div className="main">
+            <Leaderboard userId={userId} />
             <div className="main-play">
                 <h1 className="main-speed">{Math.floor(speed).toLocaleString()}</h1>
                 <div className="main-stage">
