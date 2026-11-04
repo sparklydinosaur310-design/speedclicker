@@ -6,6 +6,13 @@ export default function Achievements({ onClaimed }) {
     const [list, setList] = useState(null);
     const [error, setError] = useState('');
     const [busy, setBusy] = useState(null);
+    const [pops, setPops] = useState([]);
+
+    function addPop(id, amount) {
+        const popId = Math.random();
+        setPops((p) => [...p, { popId, id, amount }]);
+        setTimeout(() => setPops((p) => p.filter((x) => x.popId !== popId)), 800);
+    }
 
     function refresh() {
         apiFetch('/api/achievements')
@@ -29,7 +36,10 @@ export default function Achievements({ onClaimed }) {
                 body: JSON.stringify({ id }),
             });
             if (res.error) setError(res.error);
-            else onClaimed(res.reward);
+            else {
+                onClaimed(res.reward);
+                addPop(id, res.reward);
+            }
         } catch {
             setError('Claim failed');
         }
@@ -45,6 +55,9 @@ export default function Achievements({ onClaimed }) {
             <ul className="ach-list">
                 {list?.map((a) => (
                     <li key={a.id} className={`ach ${a.claimed ? 'done' : ''}`}>
+                        {pops.filter((p) => p.id === a.id).map((p) => (
+                        <span key={p.popId} className="ach-pop">+{p.amount.toLocaleString()}</span>
+                        ))}
                         <div className="ach-info">
                             <strong>{a.name}</strong>
                             <span>{a.description}</span>

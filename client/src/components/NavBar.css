@@ -23,3 +23,17 @@
 .nav button.on {
     background: #ee4266;
 }
+
+.nav-badge {
+    display: inline-block;
+    min-width: 28px;
+    height: 28px;
+    margin-left: 10px;
+    line-height: 28px;
+    font-size: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: #ffd23f;
+    color: #16213e;
+}

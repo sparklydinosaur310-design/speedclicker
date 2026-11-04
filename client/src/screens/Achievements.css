@@ -58,3 +58,23 @@
 .ach-error {
     color: #ef3f61;
 }
+
+.ach {
+    position: relative;
+}
+
+.ach-pop {
+    position: absolute;
+    right: 40px;
+    top: 4px;
+    pointer-events: none;
+    font-size: 2rem;
+    color: #ffd23f;
+    text-shadow: 2px 2px 0 #000;
+    animation: ach-pop-up 0.8s ease-out forwards;
+}
+
+@keyframes ach-pop-up {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-80px); }
+}

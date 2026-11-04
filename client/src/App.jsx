@@ -16,6 +16,7 @@ export default function App() {
   const [screen, setScreen] = useState('main');
   const game = useGame();
   const [loaded, setLoaded] = useState(false);
+  const [claimable, setClaimable] = useState(0);
   const gameRef = useRef(game);
 
   useEffect(() => {
@@ -84,6 +85,21 @@ export default function App() {
       };
     }, [loaded]);
 
+    function refreshClaimable() {
+      apiFetch('/api/achievements')
+      .then((data) => {
+        if (Array.isArray(data)) setClaimable(data.filter((a) => a.claimable).length);
+      })
+      .catch(() => {});
+    }
+
+    useEffect(() => {
+      if (!loaded) return;
+      refreshClaimable();
+      const timer = setInterval(refreshClaimable, 10000);
+      return () => clearInterval(timer);
+    }, [loaded, screen]);
+
   if (loading) return <h1>LOADING...</h1>;
   if (!session) return <Login />;
   if (!profile) return <h1>LOADING PROFILE...</h1>;
@@ -126,14 +142,15 @@ export default function App() {
       )}
       {screen === 'achievements' && (
         <Achievements
-        onClaimed={(reward) =>
-          game.load({ earned: game.earned + reward, levels: game.levels })
-        }
+        onClaimed={(reward) =>{
+          game.load({ earned: game.earned + reward, levels: game.levels });
+          refreshClaimable();
+        }}
         />
       )}
       {screen === 'challenge' && <h1 style={{ padding: '90px 24px' }}>CHALLENGE</h1>}
 
-      <NavBar screen={screen} onChange={setScreen} />
+      <NavBar screen={screen} onChange={setScreen} badges={{ achievements: claimable }} />
       </>
   );
 }

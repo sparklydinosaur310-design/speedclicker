@@ -6,7 +6,7 @@ const TABS = [
     { id: 'challenge', label: 'CHALLENGE' },
 ];
 
-export default function NavBar({ screen, onChange }) {
+export default function NavBar({ screen, onChange, badges = {} }) {
     return (
         <nav className="nav">
         {TABS.map((tab) => (
@@ -17,6 +17,7 @@ export default function NavBar({ screen, onChange }) {
             onClick={() => onChange(tab.id)}
             >
                 {tab.label}
+                {badges[tab.id] > 0 && <span className="nav-badge">{badges[tab.id]}</span>}
             </button>
         ))}
         </nav>
