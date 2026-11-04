@@ -15,7 +15,7 @@ function ruleMet(rule, earned) {
 router.get('/', requireAuth, async (req, res) => {
     const { data: state, error } = await supabase
     .from('game_state')
-    .select('total_speed')
+    .select('total_speed, upgrades')
     .eq('user_id', req.user.id)
     .maybeSingle();
 
@@ -70,7 +70,7 @@ router.post('/claim', requireAuth, async (req, res) => {
 
     const { error: claimError } = await supabase
     .from('achievements')
-    .insert({ user_id: req.user.id, achievemnt_id: achievement.id });
+    .insert({ user_id: req.user.id, achievement_id: achievement.id });
 
     if (claimError) {
         if (claimError.code === '23505') {
@@ -80,8 +80,8 @@ router.post('/claim', requireAuth, async (req, res) => {
     }
 
     const now = new Date().toISOString();
-    const earned = state.total_speed + achievements.reward;
-    const speed = earned - spentOn(upgrades, states.upgrades);
+    const earned = state.total_speed + achievement.reward;
+    const speed = earned - spentOn(upgrades, state.upgrades);
 
     const { error: saveError } = await supabase
     .from('game_state')

@@ -5,6 +5,7 @@ import Login from './screens/Login.jsx';
 import AvatarCreator from './screens/AvatarCreator.jsx';
 import SettingsMenu from './components/SettingsMenu.jsx';
 import Main from './screens/Main.jsx';
+import Achievements from './screens/Achievements.jsx';
 import NavBar from './components/NavBar.jsx';
 import { useGame } from './game/useGame.js';
 
@@ -119,11 +120,17 @@ export default function App() {
         perSecond={game.perSecond}
         onRun={game.run}
         onBuy={game.buy}
-        userId={session.user.Id}
+        userId={session.user.id}
         earned={game.earned}
         />
       )}
-      {screen === 'achievements' && <h1 style={{ padding: '90px 24px' }}>ACHIEVEMENTS</h1>}
+      {screen === 'achievements' && (
+        <Achievements
+        onClaimed={(reward) =>
+          game.load({ earned: game.earned + reward, levels: game.levels })
+        }
+        />
+      )}
       {screen === 'challenge' && <h1 style={{ padding: '90px 24px' }}>CHALLENGE</h1>}
 
       <NavBar screen={screen} onChange={setScreen} />
