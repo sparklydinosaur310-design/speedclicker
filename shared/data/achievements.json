@@ -1,0 +1,9 @@
+[
+    {
+        "id": "first-step",
+        "name": "First Steps",
+        "description": "Get 1 speed",
+        "reward": 50,
+        "rule": { "type": "earned_at_least", "value": 1 }
+    }
+]
