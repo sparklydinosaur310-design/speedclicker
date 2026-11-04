@@ -1,9 +1,7 @@
 [
-    {
-        "id": "first-step",
-        "name": "First Steps",
-        "description": "Get 1 speed",
-        "reward": 50,
-        "rule": { "type": "earned_at_least", "value": 1 }
-    }
+    { "id": "first-step", "name": "First Steps", "description": "Get 1 speed", "reward": 50, "rule": { "type": "earned_at_least", "value": 1 } },
+    { "id": "hundred-speed", "name": "Getting Fast", "description": "Get 100 speed", "reward": 100, "rule": {"type": "earned_at_least", "value": 100 } },
+    { "id": "ten-thousand speed", "name": "Sonic Speed", "description": "Get 10,000 speed", "reward": 1000, "rule": {"type": "earned_at_least", "value": 10000} },
+    { "id": "fifty-thousand-speed", "name": "Supersonic speed", "description": "Get 50,000 speed", "reward": 5000, "rule": {"type": "earned_at_least", "value": 50000} },
+    { "id": "hundred-thousand-speed", "name": "Lightspeed", "description": "Get 100,000 speed", "reward": 10000, "rule": { "type": "earned_at_least", "value": 100000} }
 ]
