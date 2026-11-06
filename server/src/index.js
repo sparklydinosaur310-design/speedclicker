@@ -6,6 +6,7 @@ import { requireAuth } from './middleware/requireAuth.js';
 import profileRoutes from './routes/profile.js';
 import gameRoutes from './routes/game.js';
 import achievementRoutes from './routes/achievements.js';
+import eggRoutes from './routes/eggs.js';
 
 const app = express();
 app.use(cors({ origin: process.env.CLIENT_ORIGIN }));
@@ -23,6 +24,7 @@ app.get('/api/me', requireAuth, (req, res) => {
 app.use('/api/profile', profileRoutes);
 app.use('/api/game', gameRoutes);
 app.use('/api/achievements', achievementRoutes);
+app.use('/api/eggs', eggRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
