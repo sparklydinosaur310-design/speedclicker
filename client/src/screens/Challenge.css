@@ -1,0 +1,57 @@
+.challenge {
+    padding: 90px 24px 120px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.chal-timer {
+    color: #ffd23f;
+    font-size: 1.5rem;
+    margin: 16px 0;
+}
+
+.chal-biomes {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.chal-biome {
+    padding: 16px;
+    background: #16213e;
+    border: 4px solid #ffd23f;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.chal-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.chal-eggs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.chal-egg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.chal-tier {
+    font-size: 0.9rem;
+}
+
+.tier-common { color: #f1e4c8 }
+.tier-rare { color: #4cc9f0 }
+.tier-mythical { color: #c77dff }
+.tier-legendary { color: #ffd23f }
+
+.chal-error {
+    color: #ef3f61;
+}
