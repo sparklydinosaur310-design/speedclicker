@@ -1,0 +1,21 @@
+.egg {
+    display: inline-block;
+}
+
+.egg-rare {
+    filter: drop-shadow(0 0 4px #4cc9f0);
+}
+
+.egg-mythical {
+    filter: drop-shadow(0 0 8px #c77dff);
+}
+
+.egg-legendary {
+    filter: drop-shadow(0 0 12px #ffd23f);
+    animation: egg-bob 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes egg-bob {
+    from { transform: translateY(0); }
+    to { transform: translateY(-6px); }
+}

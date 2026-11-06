@@ -8,6 +8,7 @@ import Main from './screens/Main.jsx';
 import Achievements from './screens/Achievements.jsx';
 import NavBar from './components/NavBar.jsx';
 import { useGame } from './game/useGame.js';
+import Egg from './components/Egg.jsx';
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -148,7 +149,13 @@ export default function App() {
         }}
         />
       )}
-      {screen === 'challenge' && <h1 style={{ padding: '90px 24px' }}>CHALLENGE</h1>}
+      {screen === 'challenge' && (
+        <div style={{ padding: '90px 24px', display: 'flex', gap: 24 }}>
+          {['common', 'rare', 'mythical', 'legendary'].map((t) => (
+            <Egg key={t} tier={t} scale={10} />
+          ))}
+        </div>
+      )}
 
       <NavBar screen={screen} onChange={setScreen} badges={{ achievements: claimable }} />
       </>
