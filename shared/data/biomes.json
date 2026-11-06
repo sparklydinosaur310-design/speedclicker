@@ -1,0 +1,79 @@
+{
+    "resetMinutes": 5,
+    "maxLegendaryPerBiome": 2,
+    "tiers": {
+        "common": {
+            "label": "COMMON", "weight": 77, "multiplier": 1,
+            "colors": { "o": "5a4a3a", "b": "#f1e4c8", "l": "#fffaf0", "d": "#d2bd96", "a": "#a98467" }
+        },
+        "rare": {
+            "label": "RARE", "weight": 20, "multiplier": 1.25,
+            "colors": { "o": "#123a5e", "b": "#4cc9f0", "l": "#8becff", "d": "#2a8fc0", "a": "#ffffff" }
+        },
+        "mythical": {
+            "label": "MYTHIC", "weight": 2.5, "multiplier": 1.6,
+            "colors": { "o": "#3c096c", "b": "#9d4edd", "l": "#d9a8ff", "d": "#6a2fb0", "a": "#ff7ae5" }
+        },
+        "legendary": {
+            "label": "LEGEMDARY", "weight": 0.5, "multiplier": 2,
+            "colors": { "o": "#7a4a00", "b": "#ffd23f", "l": "#fff3b0", "d": "#e09f00", "a": "#ffffff" }
+        }
+    },
+    "biomes": [
+        {
+            "id": "meadow", "name": "Meadow", "npc": "Bunny Bolt", "npcSpeed": 1000,
+            "creatures": [
+                { "id": "fluffy-bunny", "name": "Fluffy Bunny", "tier": "common" },
+                { "id": "ladybug", "name": "Ladybug", "tier": "common" },
+                { "id": "honeybee", "name": "HoneyBee", "tier": "rare" },
+                { "id": "fawn", "name": "Fawn", "tier": "rare" },
+                { "id": "rainbow-butterfly", "name": "Rainbow Butterfly", "tier": "mythic" },
+                { "id": "golden-stag", "name": "Golden Stag", "tier": "legendary" }
+            ]
+        },
+        {
+            "id": "desert", "name": "Desert", "npc": "Dune Dasher", "npcSpeed": 5000,
+            "creatures": [
+                { "id": "sand-lizard", "name": "Sand Lizard", "tier": "common" },
+                { "id": "scorpion", "name": "Scorpion", "tier": "common" },
+                { "id": "fennec-fox", "name": "Fennec Fox", "tier": "rare" },
+                { "id": "scarab-beetle", "name": "Scarab Beetle", "tier": "rare" },
+                { "id": "sun-serpent", "name": "Sun Serpent", "tier": "mythic" },
+                { "id": "pharaoh-sphinx", "name": "Pharaoh Sphinx", "tier": "legendary" }
+            ]
+        },
+        {
+            "id": "tundra", "name": "Tundra", "npc": "Frost Sprinter", "npcSpeed": 20000,
+            "creatures": [
+                { "id": "snow-hare", "name": "Snow Hare", "tier": "common" },
+                { "id": "penguin", "name": "Penguin", "tier": "common" },
+                { "id": "arctic-fox", "name": "Arctic Fox", "tier": "rare" },
+                { "id": "walrus", "name": "Walrus", "tier": "rare" },
+                { "id": "aurora-wolf", "name": "Aurora Wolf", "tier": "mythic" },
+                { "id": "yeti-king", "name": "Yeti King", "tier": "legendary" }
+            ]
+        },
+        {
+            "id": "volcano", "name": "Volcano", "npc": "Lava Runner", "npcSpeed": 60000,
+            "creatures": [
+                { "id": "ember-mouse", "name": "Ember Mouse", "tier": "common" },
+                { "id": "ash-bat", "name": "Ash Bat", "tier": "common" },
+                { "id": "magma-crab", "name": "Magma Crab", "tier": "rare" },
+                { "id": "fire-salamander", "name": "Fire Salamander", "tier": "rare" },
+                { "id": "phoenix", "name": "Phoenix", "tier": "Mythic" },
+                { "id": "lava-dragon", "name": "Lava Dragon", "tier": "legendary" }
+            ]
+        },
+        {
+            "id": "ocean", "name": "Deep Ocean", "npc": "Tide Racer", "npcSpeed": 150000,
+            "creatures": [
+                { "id": "clownfish", "name": "Clownfish", "tier": "common" },
+                { "id": "sea-turtle", "name": "Sea Turtle", "tier": "common" },
+                { "id": "jellyfish", "name": "Jellyfish", "tier": "rare" },
+                { "id": "seahorse", "name": "Seahorse", "tier": "rare" },
+                { "id": "kraken", "name": "Kraken", "tier": "mythic" },
+                { "id": "leviathan", "name": "Leviathan", "tier": "legendary" }
+            ]
+        }
+    ]
+}
