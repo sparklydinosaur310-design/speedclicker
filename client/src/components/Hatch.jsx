@@ -1,21 +1,8 @@
 import { useEffect, useState } from 'react';
 import Egg from './Egg.jsx';
-import PixelGrid from './PixelGrid.jsx';
+import Creature from './Creature.jsx';
 import biomes from '../../../shared/data/biomes.json';
 import './Hatch.css';
-
-const CREATURE_ROWS = [
-    '..00....00..',
-    '.obbo..obbo.',
-    '.obbbbbbbbo.',
-    'obbbbbbbbbbo',
-    'obbobbbbobbo',
-    'obbobbbbobbo',
-    'obbbbaabbbbo',
-    'obllbbbbllbo',
-    '.obbbbbbbbo.',
-    '..oo....oo..',
-];
 
 export default function Hatch({ tier, creature, duplicate }) {
     const [phase, setPhase] = useState('shake');
@@ -43,11 +30,7 @@ export default function Hatch({ tier, creature, duplicate }) {
     return (
         <div className="hatch">
             <div className="hatch-creature">
-                <PixelGrid
-                rows={CREATURE_ROWS}
-                palette={biomes.tiers[creature.tier].colors}
-                scale={8}
-                />
+                <Creature id={creature.id} tier={creature.tier} scale={8} />
             </div>
             <p>
                 IT HATCHED A{' '}
@@ -55,7 +38,7 @@ export default function Hatch({ tier, creature, duplicate }) {
                     {biomes.tiers[creature.tier].label} {creature.name.toUpperCase()}
                 </span>
             </p>
-            {duplicate && <p>YOU ALREADY HATCHED THIS ONE.</p>}
+            {duplicate && <p>YOU ALREADY HATCHED THIS.</p>}
         </div>
     );
 }
