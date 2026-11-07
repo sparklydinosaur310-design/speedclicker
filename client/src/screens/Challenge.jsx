@@ -3,12 +3,13 @@ import { apiFetch } from '../api/api.js';
 import Egg from '../components/Egg.jsx';
 import biomes from '../../../shared/data/biomes.json';
 import './Challenge.css';
+import Race from './Race.jsx';
 
 function needed(biome, tier) {
     return Math.ceil(biome.npcSpeed * biomes.tiers[tier].multiplier);
 }
 
-export default function Challenge() {
+export default function Challenge({ avatar }) {
     const [data, setData] = useState(null);
     const [left, setLeft] = useState(0);
     const [error, setError] = useState('');
@@ -68,7 +69,7 @@ export default function Challenge() {
                 setSlot(null);
                 load();
             } else {
-                setResult({ ...res, tier: egg.tier });
+                setResult({ ...res, tier: egg.tier, racing: true });
             }
         } catch {
             setError('Challenge failed');
@@ -144,6 +145,17 @@ export default function Challenge() {
             )}
 
             {data && biome && result && (
+                <Race
+                    avatar={avatar}
+                    biomeId={biome.id}
+                    npcName={biome.npc}
+                    won={result.won}
+                    ratio={result.yours / result.needed}
+                    onDone={() => setResult((r) => ({ ...r, racing: false}))}
+                    />
+            )}
+
+            {data && biome && result && !result.racing && (
                 <section className="chal-biome chal-result">
                     {result.won ? (
                         <>

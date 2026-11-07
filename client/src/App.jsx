@@ -149,7 +149,7 @@ export default function App() {
         }}
         />
       )}
-      {screen === 'challenge' && <Challenge />}
+      {screen === 'challenge' && <Challenge avatar={profile.profile.avatar} />}
 
       <NavBar screen={screen} onChange={setScreen} badges={{ achievements: claimable }} />
       </>
