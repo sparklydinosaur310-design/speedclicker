@@ -1,27 +1,94 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PixelSprite from '../components/PixelSprite.jsx';
 import PixelGrid from '../components/PixelGrid.jsx';
 import './Race.css';
 
 const RACE_MS = 4000;
 
-const NPC_ROWS =[
-    '..oooooo..',
-    '.obbbbbbo.',
-    'obbbbbbbbo',
-    'obebbbebbo',
-    'obbbbbbbbo',
-    'obbbddbbbo',
-    '.obbbbbbo.',
-    '..oo..oo..',
-];
-
-const NPC_COLORS = {
-    meadow: { b: '#7bd88f', d: '#4ea866' },
-    desert: { b: '#e0b050', d: '#b88a30' },
-    tundra: { b: '#9fd8f0', d: '#6fb0d0' },
-    volcano: { b: '#ee5a2a', d: '#b03a14' },
-    ocean: { b: '#3a8fd0', d: '#2565a0' },
+const NPCS = {
+    meadow: {
+        rows: [
+            '...oo.oo....',
+            '..obbobbo...',
+            '..obbobbo...',
+            '..obbbbbo...',
+            '.obbbebbbno.',
+            '.obbbbbbbno.',
+            '.obbbbbbbbo.',
+            '.olllbbbbbo.',
+            '.olllbbbbbo.',
+            '..obbbbbbbo.',
+            '..obo..obo..',
+            '..ooo..ooo..',
+        ],
+        colors: { o: '#1a1a2e', b: '#f2ede4', l: '#ffc2d1', e: '#111111', n: '#ff6b9d' },
+    },
+    desert: {
+        rows: [
+            '..00........',
+            '.obbo.......',
+            '.obbboooo...',
+            '.obbbbbbbbo.',
+            '..obbbebbbno',
+            '..obbbbbbbo.',
+            'ooobbbbbbo..',
+            'obbobbbbbbo.',
+            '.oo.obbbbbo.',
+            '....obbbbo..',
+            '....obo.obo.',
+            '....ooo.ooo.',
+        ],
+        colors: { o: '#3b2412', b: '#e9a64b', e: '#111111', n: '#111111' },
+    },
+    tundra: {
+        rows: [
+            '....oooo....',
+            '...obbbbo...',
+            '..obbbbbbo..',
+            '..obbebbbno.',
+            '..obbbbbbo..',
+            '.oblllllbo..',
+            '.oblllllbo..',
+            '.oblllllbo..',
+            '.oblllllbo..',
+            '..obllllbo..',
+            '...nn..nn...',
+            '..nnn..nnn..',
+        ],
+        colors: { o: '#0b1020', b: '#2c4a7c', l:'#ffffff', e: '#ffffff', n: '#ff9f1c' },
+    },
+    volcano: {
+        rows: [
+            '.....oo.....',
+            '....obbo....',
+            '...obbbbo...',
+            '..obbaabbo..',
+            '..obaaaabbo.',
+            '.obbaeaaebbo',
+            '.obbaaaaabbo',
+            '.obbbaaabbbo',
+            '..obbbbbbbo.',
+            '..obbbbbbo..',
+            '..obo..obo..',
+            '..ooo..ooo..',
+        ],
+        colors: { o: '#3a0a05', b: '#e63e1c', a: '#ffd23f', e: '#111111' },
+    },
+    ocean: {
+        rows: [
+            'oo........oo',
+            'obo......obo',
+            'obbo....obbo',
+            '.obbbbbbbbo.',
+            '.obebbbbebo.',
+            '.obbbbbbbbo.',
+            '.obbddddbbo.',
+            '..obbbbbbo..',
+            '.o.o.oo.o.o.',
+            'o..o....o..o',
+        ],
+        colors: { o: '#1a1a2e', b: '#ee6055', d: '#b03a2e', e: '#ffffff' },
+    },
 };
 
 export default function Race({ avatar, biomeId, npcName, won, ratio, onDone }) {
@@ -41,10 +108,7 @@ export default function Race({ avatar, biomeId, npcName, won, ratio, onDone }) {
         };
     }, []);
 
-    const palette = useMemo(() => {
-        const c = NPC_COLORS[biomeId] ?? NPC_COLORS.meadow;
-        return { o: '#1a1a2e', b: c.d, d: c.d, e: '#111111' };
-    }, [biomeId]);
+    const npc = NPCS[biomeId] ?? NPCS.meadow;
 
     const gap = Math.min(40, 8 + (ratio - 1) * 32);
     const playerStart = 12;
@@ -63,7 +127,7 @@ export default function Race({ avatar, biomeId, npcName, won, ratio, onDone }) {
                 <div className="race-runner" style={{ left: `${go ? npcEnd : npcStart}%`}}>
                     <span className="race-name">{npcName}</span>
                     <div className="race-bob">
-                        <PixelGrid rows={NPC_ROWS} palette={palette} scale={6} />
+                        <PixelGrid rows={npc.rows} palette={npc.colors} scale={6} />
                     </div>
                 </div>
                 <div className="race-runner" style={{ left: `${go ? playerEnd : playerStart}%`}}>
