@@ -149,6 +149,7 @@ export default function Challenge({ avatar }) {
                     avatar={avatar}
                     biomeId={biome.id}
                     npcName={biome.npc}
+                    tier={result.tier}
                     won={result.won}
                     ratio={result.yours / result.needed}
                     onDone={() => setResult((r) => ({ ...r, racing: false}))}

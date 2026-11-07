@@ -15,7 +15,7 @@
             "colors": { "o": "#3c096c", "b": "#9d4edd", "l": "#d9a8ff", "d": "#6a2fb0", "a": "#ff7ae5" }
         },
         "legendary": {
-            "label": "LEGEMDARY", "weight": 0.5, "multiplier": 2,
+            "label": "LEGENDARY", "weight": 0.5, "multiplier": 2,
             "colors": { "o": "#7a4a00", "b": "#ffd23f", "l": "#fff3b0", "d": "#e09f00", "a": "#ffffff" }
         }
     },
@@ -27,7 +27,7 @@
                 { "id": "ladybug", "name": "Ladybug", "tier": "common" },
                 { "id": "honeybee", "name": "HoneyBee", "tier": "rare" },
                 { "id": "fawn", "name": "Fawn", "tier": "rare" },
-                { "id": "rainbow-butterfly", "name": "Rainbow Butterfly", "tier": "mythic" },
+                { "id": "rainbow-butterfly", "name": "Rainbow Butterfly", "tier": "mythical" },
                 { "id": "golden-stag", "name": "Golden Stag", "tier": "legendary" }
             ]
         },
@@ -38,7 +38,7 @@
                 { "id": "scorpion", "name": "Scorpion", "tier": "common" },
                 { "id": "fennec-fox", "name": "Fennec Fox", "tier": "rare" },
                 { "id": "scarab-beetle", "name": "Scarab Beetle", "tier": "rare" },
-                { "id": "sun-serpent", "name": "Sun Serpent", "tier": "mythic" },
+                { "id": "sun-serpent", "name": "Sun Serpent", "tier": "mythical" },
                 { "id": "pharaoh-sphinx", "name": "Pharaoh Sphinx", "tier": "legendary" }
             ]
         },
@@ -49,7 +49,7 @@
                 { "id": "penguin", "name": "Penguin", "tier": "common" },
                 { "id": "arctic-fox", "name": "Arctic Fox", "tier": "rare" },
                 { "id": "walrus", "name": "Walrus", "tier": "rare" },
-                { "id": "aurora-wolf", "name": "Aurora Wolf", "tier": "mythic" },
+                { "id": "aurora-wolf", "name": "Aurora Wolf", "tier": "mythical" },
                 { "id": "yeti-king", "name": "Yeti King", "tier": "legendary" }
             ]
         },
@@ -60,7 +60,7 @@
                 { "id": "ash-bat", "name": "Ash Bat", "tier": "common" },
                 { "id": "magma-crab", "name": "Magma Crab", "tier": "rare" },
                 { "id": "fire-salamander", "name": "Fire Salamander", "tier": "rare" },
-                { "id": "phoenix", "name": "Phoenix", "tier": "Mythic" },
+                { "id": "phoenix", "name": "Phoenix", "tier": "mythical" },
                 { "id": "lava-dragon", "name": "Lava Dragon", "tier": "legendary" }
             ]
         },
@@ -71,7 +71,7 @@
                 { "id": "sea-turtle", "name": "Sea Turtle", "tier": "common" },
                 { "id": "jellyfish", "name": "Jellyfish", "tier": "rare" },
                 { "id": "seahorse", "name": "Seahorse", "tier": "rare" },
-                { "id": "kraken", "name": "Kraken", "tier": "mythic" },
+                { "id": "kraken", "name": "Kraken", "tier": "mythical" },
                 { "id": "leviathan", "name": "Leviathan", "tier": "legendary" }
             ]
         }

@@ -1,98 +1,41 @@
 import { useEffect, useRef, useState } from 'react';
 import PixelSprite from '../components/PixelSprite.jsx';
 import PixelGrid from '../components/PixelGrid.jsx';
+import Egg from '../components/Egg.jsx';
 import './Race.css';
 
-const RACE_MS = 4000;
+const RACE_MS = 3500;
 
-const NPCS = {
-    meadow: {
-        rows: [
-            '...oo.oo....',
-            '..obbobbo...',
-            '..obbobbo...',
-            '..obbbbbo...',
-            '.obbbebbbno.',
-            '.obbbbbbbno.',
-            '.obbbbbbbbo.',
-            '.olllbbbbbo.',
-            '.olllbbbbbo.',
-            '..obbbbbbbo.',
-            '..obo..obo..',
-            '..ooo..ooo..',
-        ],
-        colors: { o: '#1a1a2e', b: '#f2ede4', l: '#ffc2d1', e: '#111111', n: '#ff6b9d' },
-    },
-    desert: {
-        rows: [
-            '..00........',
-            '.obbo.......',
-            '.obbboooo...',
-            '.obbbbbbbbo.',
-            '..obbbebbbno',
-            '..obbbbbbbo.',
-            'ooobbbbbbo..',
-            'obbobbbbbbo.',
-            '.oo.obbbbbo.',
-            '....obbbbo..',
-            '....obo.obo.',
-            '....ooo.ooo.',
-        ],
-        colors: { o: '#3b2412', b: '#e9a64b', e: '#111111', n: '#111111' },
-    },
-    tundra: {
-        rows: [
-            '....oooo....',
-            '...obbbbo...',
-            '..obbbbbbo..',
-            '..obbebbbno.',
-            '..obbbbbbo..',
-            '.oblllllbo..',
-            '.oblllllbo..',
-            '.oblllllbo..',
-            '.oblllllbo..',
-            '..obllllbo..',
-            '...nn..nn...',
-            '..nnn..nnn..',
-        ],
-        colors: { o: '#0b1020', b: '#2c4a7c', l:'#ffffff', e: '#ffffff', n: '#ff9f1c' },
-    },
-    volcano: {
-        rows: [
-            '.....oo.....',
-            '....obbo....',
-            '...obbbbo...',
-            '..obbaabbo..',
-            '..obaaaabbo.',
-            '.obbaeaaebbo',
-            '.obbaaaaabbo',
-            '.obbbaaabbbo',
-            '..obbbbbbbo.',
-            '..obbbbbbo..',
-            '..obo..obo..',
-            '..ooo..ooo..',
-        ],
-        colors: { o: '#3a0a05', b: '#e63e1c', a: '#ffd23f', e: '#111111' },
-    },
-    ocean: {
-        rows: [
-            'oo........oo',
-            'obo......obo',
-            'obbo....obbo',
-            '.obbbbbbbbo.',
-            '.obebbbbebo.',
-            '.obbbbbbbbo.',
-            '.obbddddbbo.',
-            '..obbbbbbo..',
-            '.o.o.oo.o.o.',
-            'o..o....o..o',
-        ],
-        colors: { o: '#1a1a2e', b: '#ee6055', d: '#b03a2e', e: '#ffffff' },
-    },
+const CHASER = [
+    '....oooo....',
+    '...obbbbo...',
+    '..obbbbbbo..',
+    '..obbbbbbo..',
+    '..oddddddo..',
+    '.obbbbbbbbb.',
+    'obbbbtttbbbo',
+    'obbbbtttbbbo',
+    'obbbbbbbbbbo',
+    '.obbbbbbbbo.',
+    '.obbo..obbo.',
+    '.oooo..oooo.',
+];
+
+const COLORS = {
+    meadow: { b: '#4ea866', d: '#2f7a46', t: '#ff6b9d' },
+    desert: { b: '#d9a441', d: '#a67a24', t: '#c0392b' },
+    tundra: { b: '#7fb720', d: '#4f86b0', t: '#ffffff' },
+    volcano: { b: '#b02a14', d: '#7a1a0c', t: '#ffd23f' },
+    ocean: { b: '#2a9d8f', d: '#1d6f66', t: '#ffffff' },
 };
 
-export default function Race({ avatar, biomeId, npcName, won, ratio, onDone }) {
-    const [go, setGo] = useState(false);
+const PALETTES = Object.fromEntries(
+    Object.entries(COLORS).map(([IdleDeadline, c]) => [IdleDeadline, { o: '#1a1a2e', ...c }])
+);
+
+export default function Race({ avatar, biomeId, npcName, tier, won, ratio, onDone }) {
+    const [go,setGo] = useState(false);
+    const [ended, setEnded] = useState(false);
     const doneRef = useRef(onDone);
 
     useEffect(() => {
@@ -101,44 +44,46 @@ export default function Race({ avatar, biomeId, npcName, won, ratio, onDone }) {
 
     useEffect(() => {
         const start = setTimeout(() => setGo(true), 100);
-        const end = setTimeout(() => doneRef.current(), RACE_MS + 1200);
+        const end = setTimeout(() => setEnded(true), RACE_MS + 100);
+        const done = setTimeout(() => doneRef.current(), RACE_MS + 1700);
         return () => {
             clearTimeout(start);
             clearTimeout(end);
+            clearTimeout(done);
         };
     }, []);
 
-    const npc = NPCS[biomeId] ?? NPCS.meadow;
-
-    const gap = Math.min(40, 8 + (ratio - 1) * 32);
-    const playerStart = 12;
-    const npcStart = 0;
-    const playerEnd = won? 84: 50;
-    const npcEnd = won
-        ? playerEnd - gap
-        : playerEnd + 6 + Math.min(14, (1 - ratio) * 20);
+    const playerStart = 4;
+    const npcStart = -18;
+    const catchY = 20 + Math.min(1, Math.max(0, ratio)) * 40;
+    const gap = Math.min(45, 14 + (ratio - 1) * 30);
+    const playerEnd = won ? 72 : catchY;
+    const npcEnd = won ? playerEnd - gap : catchY - 8;
 
     return (
         <div className="race">
-            <h2>RUN!</h2>
+            <h2>{ended ? (won ? 'GOT THE EGG!' : 'CAUGHT!') : 'RUN!'}</h2>
             <div className="race-track">
-                <div className="race-finish" />
-                <div className="race-ground" />
-                <div className="race-runner" style={{ left: `${go ? npcEnd : npcStart}%`}}>
-                    <span className="race-name">{npcName}</span>
-                    <div className="race-bob">
-                        <PixelGrid rows={npc.rows} palette={npc.colors} scale={6} />
-                    </div>
+                <div className={`race-lane${go && !ended ? ' moving' : ''}`} />
+                <div className={`race-goal${won && ended ? ' grabbed' : ''}`}>
+                    <Egg tier={tier} scale={5} />
                 </div>
-                <div className="race-runner" style={{ left: `${go ? playerEnd : playerStart}%`}}>
-                    <div className="race-bob">
+                <div className="race-runner" style={{ bottom: `${go ? npcEnd: npcStart}%` }}>
+                    <span className="race-name">{npcName}</span>
+                    <PixelGrid rows={CHASER} palette={PALETTES[biomeId] ?? PALETTES.meadow} scale={6} />
+                </div>
+            <div
+                className={`race-runner${!won && ended ? ' hit' : ''}`}
+                style={{ bottom: `${go ? playerEnd : playerStart}%` }}
+                >
+                    <div className={ended ? '' : 'race-bob'}>
                         <PixelSprite avatar={avatar} scale={5} />
                     </div>
                 </div>
             </div>
-            <button type="button" className="chal-btn" onClick={() => doneRef.current()}>
-                SKIP
-            </button>
-        </div>
+        <button type="button" className="chal-btn" onClick={() => doneRef.current()}>
+            SKIP
+        </button>
+    </div>
     );
 }
