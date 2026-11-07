@@ -4,6 +4,7 @@ import Egg from '../components/Egg.jsx';
 import biomes from '../../../shared/data/biomes.json';
 import './Challenge.css';
 import Race from './Race.jsx';
+import Hatch from '../components/Hatch.jsx';
 
 function needed(biome, tier) {
     return Math.ceil(biome.npcSpeed * biomes.tiers[tier].multiplier);
@@ -161,14 +162,11 @@ export default function Challenge({ avatar }) {
                     {result.won ? (
                         <>
                         <h2>YOU STOLE THE EGG!</h2>
-                        <Egg tier={result.tier} scale={8} />
-                        <p>
-                            IT HATCHED A{' '}
-                            <span className={`tier-${result.creature.tier}`}>
-                                {biomes.tiers[result.creature.tier].label} {result.creature.name.toUpperCase()}
-                            </span>
-                        </p>
-                        {result.duplicate && <p>YOU ALREADY HATCHED THIS ONE.</p>}
+                        <Hatch
+                        tier={result.tier}
+                        creature={result.creature}
+                        duplicate={result.duplicate}
+                        />
                         </>
                     ) : (
                         <>

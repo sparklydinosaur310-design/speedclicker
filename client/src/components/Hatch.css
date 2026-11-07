@@ -1,0 +1,32 @@
+.hatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-height: 200px;
+}
+
+.hatch-egg.shake {
+    animation: hatch-shake 0.3s ease-in-out infinite;
+}
+
+.hatch-egg.crack {
+    animation: hatch-shake 0.08s linear infinite;
+    filter: brightness(2);
+}
+
+@keyframes hatch-shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg); }
+    75% { transform: rotate(8deg); }
+}
+
+.hatch-creature {
+    animation: hatch-pop 0.5s ease-out;
+}
+
+@keyframes hatch-pop {
+    from { transform: scale(0.2); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    to { transform: scale(1); opcaity: 1; }
+}
