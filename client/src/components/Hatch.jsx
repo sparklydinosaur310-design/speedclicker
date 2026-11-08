@@ -4,7 +4,7 @@ import Creature from './Creature.jsx';
 import biomes from '../../../shared/data/biomes.json';
 import './Hatch.css';
 
-export default function Hatch({ tier, creature, duplicate, bonus = 0 }) {
+export default function Hatch({ tier, creature, duplicate, bonus = 0, onClose }) {
     const [phase, setPhase] = useState('shake');
 
     useEffect(() => {
@@ -18,9 +18,9 @@ export default function Hatch({ tier, creature, duplicate, bonus = 0 }) {
 
     if (phase !== 'reveal') {
         return (
-            <div className="hatch">
+            <div className="hatch hatch-full">
                 <div className={`hatch-egg ${phase}`}>
-                    <Egg tier={tier} scale={8} />
+                    <Egg tier={tier} scale={12} />
                 </div>
                 <p>IT IS HATCHING...</p>
             </div>
@@ -28,9 +28,9 @@ export default function Hatch({ tier, creature, duplicate, bonus = 0 }) {
     }
 
     return (
-        <div className="hatch">
+        <div className="hatch hatch-full">
             <div className="hatch-creature">
-                <Creature id={creature.id} tier={creature.tier} scale={8} />
+                <Creature id={creature.id} tier={creature.tier} scale={12} />
             </div>
             <p>
                 IT HATCHED A{' '}
@@ -41,6 +41,9 @@ export default function Hatch({ tier, creature, duplicate, bonus = 0 }) {
             {duplicate && (
                 <p>YOU ALREADY HATCHED THIS. +{bonus.toLocaleString()} COINS</p>
             )}
+            <button type="button" className="chal-btn" onClick={onClose}>
+                CONTINUE
+            </button>
         </div>
     );
 }

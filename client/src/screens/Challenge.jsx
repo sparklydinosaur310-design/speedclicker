@@ -167,6 +167,7 @@ export default function Challenge({ avatar }) {
                         creature={result.creature}
                         duplicate={result.duplicate}
                         bonus={result.bonus}
+                        onClose={goBack}
                         />
                         </>
                     ) : (
