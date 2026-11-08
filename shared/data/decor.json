@@ -1,0 +1,9 @@
+{
+    "backgrounds": [
+        { "id": "meadow", "name": "Meadow", "price": 6500, "top": "#8fd3ff", "bottom": "#6cc070" },
+        { "id": "desert", "name": "Desert", "price": 12500, "top": "#ffd39a", "bottom": "#e04050" },
+        { "id": "tundra", "name": "Tundra", "price": 27500, "top": "#cfeaff", "bottom": "#9fc4e0" },
+        { "id": "volcano", "name": "Volcano", "price": 110000, "top": "#3a0f0f", "bottom": "#b02a14" },
+        { "id": "ocean", "name": "Deep Ocean", "price": 450000, "top": "#0b3d6b", "bottom": "#2a9d8f" }
+    ]
+}

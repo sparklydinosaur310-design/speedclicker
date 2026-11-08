@@ -10,6 +10,7 @@ import eggRoutes from './routes/eggs.js';
 import challengeRoutes from './routes/challenge.js';
 import collectionRoutes from './routes/collection.js';
 import coinRoutes from './routes/coins.js';
+import decorRoutes from './routes/decor.js';
 
 const app = express();
 app.use(cors({ origin: process.env.CLIENT_ORIGIN }));
@@ -31,6 +32,7 @@ app.use('/api/eggs', eggRoutes);
 app.use('/api/challenge', challengeRoutes);
 app.use('/api/collection', collectionRoutes);
 app.use('/api/coins', coinRoutes);
+app.use('/api/decor', decorRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
