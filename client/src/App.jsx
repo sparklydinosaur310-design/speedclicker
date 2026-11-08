@@ -10,6 +10,7 @@ import NavBar from './components/NavBar.jsx';
 import { useGame } from './game/useGame.js';
 import Challenge from './screens/Challenge.jsx';
 import Collection from './screens/Collection.jsx';
+import CoinCounter from './components/CoinCounter.jsx';
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -154,6 +155,7 @@ export default function App() {
       {screen === 'collection' && <Collection />}
       {screen === 'challenge' && <Challenge avatar={profile.profile.avatar} />}
 
+      <CoinCounter refreshKey={screen} />
       <NavBar screen={screen} onChange={setScreen} badges={{ achievements: claimable }} />
       </>
   );
