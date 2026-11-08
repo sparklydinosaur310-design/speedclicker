@@ -2,14 +2,31 @@ import { Router } from 'express';
 import { supabase } from '../db/supabase.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import achievements from '../../../shared/data/achievements.json' with { type: 'json' };
+import biomes from '../../../shared/data/biomes.json' with { type: 'json' };
 import upgrades from '../../../shared/data/upgrades.json' with { type: 'json' };
 import { spentOn } from '../../../shared/game/rules.js';
 
 const router = Router();
 
-function ruleMet(rule, earned) {
-    if (rule.type === 'earned_at_least') return earned >= rule.value;
+function ruleMet(rule, ctx) {
+    if (rule.type === 'earned_at_least') return ctx.earned >= rule.value;
+    if (rule.type === 'collect_biome') {
+        const biome = biomes.biomes.find((b) => b.id === rule.biome);
+        if (!biome) return false;
+        const have = biome.creatures.filter((c) => ctx.owned.has(c.id)).length;
+        return have >= (rule.count ?? biome.creatures.length);
+    }
     return false;
+}
+
+async function loadOwned(userId) {
+    const { data, error } = await supabase
+    .from('inventory')
+    .select('item_id')
+    .eq('user_id', userId);
+
+    if (error) return { error };
+    return { owned: new Set(data.map((row) => row.item_id)) };
 }
 
 router.get('/', requireAuth, async (req, res) => {
@@ -30,7 +47,9 @@ router.get('/', requireAuth, async (req, res) => {
     if (mineError) return res.status(500).json({ error: mineError.message });
 
     const claimed = new Set(mine.map((row) => row.achievement_id));
-
+    const inventory = await loadOwned(req.user.id);
+    if (inventory.error) return res.status(500).json({ error: inventory.error.message });
+    const ctx = { earned: state.total_speed, owned: inventory.owned };
     const list = await Promise.all(achievements.map(async (a) => {
         const { count } = await supabase
         .from('achievements')
@@ -43,7 +62,7 @@ router.get('/', requireAuth, async (req, res) => {
             description: a.description,
             reward: a.reward,
             claimed: claimed.has(a.id),
-            claimable: !claimed.has(a.id) && ruleMet(a.rule, state.total_speed),
+            claimable: !claimed.has(a.id) && ruleMet(a.rule, ctx),
             players: count ?? 0,
         };
     }));
@@ -64,7 +83,11 @@ router.post('/claim', requireAuth, async (req, res) => {
     if (error) return res.status(500).json({ error: error.message });
     if (!state) return res.status(404).json({ error: 'No saved game' });
 
-    if (!ruleMet(achievement.rule, state.total_speed)) {
+    const inventory = await loadOwned(req.user.id);
+    if (inventory.error) return res.status(500).json({ error: inventory.error.message });
+
+    const ctx = { earned: state.total_speed, owned: inventory.owned };
+    if (!ruleMet(achievement.rule, ctx)) {
         return res.status(400).json({ error: 'Not unlocked yet' });
     }
 
