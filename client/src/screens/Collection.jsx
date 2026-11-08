@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../api/api.js';
-import Creatures from '../components/Creature.jsx';
+import Creature from '../components/Creature.jsx';
 import biomes from '../../../shared/data/biomes.json';
 import './Collection.css';
 

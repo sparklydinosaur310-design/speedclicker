@@ -3,6 +3,7 @@ import './NavBar.css';
 const TABS = [
     { id: 'achievements', label: 'ACHIEVEMENTS' },
     { id: 'main', label: 'MAIN' },
+    { id: 'collection', label: 'COLLECTION' },
     { id: 'challenge', label: 'CHALLENGE' },
 ];
 

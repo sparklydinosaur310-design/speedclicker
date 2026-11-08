@@ -10,9 +10,8 @@ router.get('/', requireAuth, async (req, res) => {
     .select('item_id')
     .eq('user_id', req.user.id);
 
-    if (error) return res.status(500).json({ error: error.message
+    if (error) return res.status(500).json({ error: error.message });
         res.json({ owned: data.map((row) => row.item_id) });
     });
 
     export default router;
-})

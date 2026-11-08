@@ -20,6 +20,7 @@ const PLACEHOLDER_ROWS = [
 export default function Creature({ id, tier, scale = 8, silhouette = false }) {
     const sprite = CREATURE_SPRITES[id];
     const rows = sprite ? sprite.rows : PLACEHOLDER_ROWS;
+    const colors = sprite ? sprite.colors : biomes.tiers[tier].colors;
     const palette = useMemo(
         () =>
             silhouette
