@@ -1,5 +1,5 @@
 {
     "capSeconds": 28800,
-    "perSecond": { "common": 1, "rare": 3, "mythical": 10, "legendary": 30 },
+    "perSecond": { "common": 1, "rare": 2, "mythical": 4, "legendary": 8 },
     "duplicate": { "common": 100, "rare": 300, "mythical": 1000, "legendary": 3000}
 }

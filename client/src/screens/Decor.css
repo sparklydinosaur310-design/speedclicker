@@ -1,0 +1,53 @@
+.decor {
+    padding: 90px 24px 120px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.decor-preview {
+    display: flex;
+    align-items: flex-end;
+    height: 200px;
+    margin: 16px 0;
+    padding: 12px;
+    border: 4px solid #ffd23f;
+    box-shadow: 6px6px 0 #000;
+}
+
+.decor-label {
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    font-size: 1.5rem;
+}
+
+.decor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minimax(150px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.decor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #16213e;
+    border: 4px solid #000;
+    cursor: pointer;
+}
+
+.decor-card.pick {
+    border-color: #ffd23f;
+}
+
+.decor-swatch {
+    width: 100px;
+    height: 70px;
+    border: 3px solid #000;
+}
+
+.decor-error {
+    color: #ef3f61;
+}

@@ -1,6 +1,7 @@
 import './NavBar.css';
 
 const TABS = [
+    { id: 'decor', label: 'DECOR' },
     { id: 'achievements', label: 'ACHIEVEMENTS' },
     { id: 'main', label: 'MAIN' },
     { id: 'collection', label: 'COLLECTION' },
