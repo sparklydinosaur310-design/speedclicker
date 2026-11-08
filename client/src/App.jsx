@@ -12,6 +12,7 @@ import Challenge from './screens/Challenge.jsx';
 import Collection from './screens/Collection.jsx';
 import CoinCounter from './components/CoinCounter.jsx';
 import Decor from './screens/Decor.jsx';
+import EggBanner from './components/EggBanner.jsx';
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -131,6 +132,8 @@ export default function App() {
         onChangeAvatar={() => setScreen('avatar')}
         onLogout={() => supabase.auth.signOut()}
       />
+
+      <EggBanner hidden={screen === 'challenge'} onGo={() => setScreen('challenge')} />
 
       {screen === 'main' && (
         <Main

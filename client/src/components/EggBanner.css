@@ -1,0 +1,52 @@
+.egg-banner-space {
+    height: 52px;
+}
+
+.egg-banner {
+    position: fixed;
+    top: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    width: min(92vw, 720px);
+    border: 4px 4px 0 #000;
+    box-shadow: 4px 4px 0 #000;
+    animation: egg-banner-pulse 1s ease-in-out infinite alternate;
+}
+
+.egg-banner.legendary {
+    background: #ffd23f;
+    color: #16213e;
+}
+
+.egg-banner.mythical {
+    background: #9d4edd;
+    color: #fff;
+}
+
+.egg-banner button {
+    font-family: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.egg-banner-text {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.egg-banner-x {
+    padding: 10px 14px;
+    font-size: 1.1rem;
+}
+
+@keyframes egg-banner-pulse {
+    from { transform: translateX(-50%) scale(1); }
+    to { transform: translateX(-50%) scale(1.03); }
+}
