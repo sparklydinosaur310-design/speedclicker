@@ -13,6 +13,8 @@ import Collection from './screens/Collection.jsx';
 import CoinCounter from './components/CoinCounter.jsx';
 import Decor from './screens/Decor.jsx';
 import EggBanner from './components/EggBanner.jsx';
+import MusicToggle from './components/MusicToggle.jsx';
+import { startMusicOnFirstClick } from './game/music.js';
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -106,6 +108,8 @@ export default function App() {
       return () => clearInterval(timer);
     }, [loaded, screen]);
 
+    useEffect(() => startMusicOnFirstClick(), []);
+
   if (loading) return <h1>LOADING...</h1>;
   if (!session) return <Login />;
   if (!profile) return <h1>LOADING PROFILE...</h1>;
@@ -132,6 +136,8 @@ export default function App() {
         onChangeAvatar={() => setScreen('avatar')}
         onLogout={() => supabase.auth.signOut()}
       />
+
+      <MusicToggle />
 
       <EggBanner hidden={screen === 'challenge'} onGo={() => setScreen('challenge')} />
 
