@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from '../api/api.js';
 import decor from '../../../shared/data/decor.json';
 import './Decor.css';
+import Room from '../components/Room.jsx';
 
 export default function Decor({ onChange }) {
     const [data, setData] = useState(null);
     const [error, setError] = useState('');
     const [busy, setBusy] = useState(null);
     const [preview, setPreview] = useState(null);
+    const [roomId, setRoomId] = useState(null);
 
     function load() {
         apiFetch('/api/decor')
@@ -43,6 +45,18 @@ export default function Decor({ onChange }) {
     }
 
     const shown = decor.backgrounds.find((b) => b.id === preview);
+    if (roomId && data) {
+        return (
+            <Room
+                biomeId={roomId}
+                data={data}
+                busy={busy}
+                error={error}
+                onBuy={(id) => act('buy', id)}
+                onBack={() => setRoomId(null)}
+            />
+        );
+    }
 
     return (
         <div className="decor">
@@ -116,6 +130,18 @@ export default function Decor({ onChange }) {
                                         BUY {b.price.toLocaleString()}
                                     </button>
                                 )}
+                                {owned && (
+                                        <button
+                                            type="button"
+                                            className="chal-btn"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setRoomId(b.id);
+                                            }}
+                                        >
+                                            PROPS
+                                        </button>
+                                    )}
                             </div>
                         );
                     })}

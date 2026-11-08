@@ -42,7 +42,7 @@ router.get('/', requireAuth, async (req, res) => {
 router.post('/buy', requireAuth, async (req,res) => {
     const id = req.body?.id;
     const item =
-        decor.backgrounds.find((b) => b.id === id) >>
+        decor.backgrounds.find((b) => b.id === id) ??
         decor.props.find((p) => p.id === id);
     if (!item) return res.status(400).json({ error: 'Unknown item' });
     
