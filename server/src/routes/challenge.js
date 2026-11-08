@@ -3,6 +3,8 @@ import { supabase } from '../db/supabase.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import biomes from '../../../shared/data/biomes.json' with { type: 'json' };
 import { currentWindow, rollEggs, secondsLeft } from '../../../shared/game/eggs.js';
+import coinData from '../../../shared/data/coins.json' with { type: 'json' };
+import { settleCoins } from '../services/coins.js';
 
 const router = Router();
 
@@ -47,6 +49,9 @@ router.post('/', requireAuth, async (req, res) => {
     const options = biome.creatures.filter((c) => c.tier === tier);
     const creature = options[Math.floor(Math.random() * options.length)];
 
+    const settled = await settleCoins(req.user.id);
+    if (settled.error) return res.status(500).json({ error: settled.error.message });
+
     const { error: insertError } = await supabase
     .from('inventory')
     .insert ({
@@ -62,11 +67,23 @@ router.post('/', requireAuth, async (req, res) => {
         else return res.status(500).json({ error: insertError.message });
     }
 
+    let bonus = 0;
+    if (duplicate) {
+        bonus = coinData.duplicate[creature.tier] ?? 0;
+        const { error: bonusError } = await supabase
+        .from('game_state')
+        .update({ coins: settled.coins + bonus })
+        .eq('user_id', req.user.id);
+
+        if (bonusError) return res.status(500).json({ error: bonusError.message });
+    }
+
     res.json({
         won: true,
         needed,
         yours: state.total_speed,
         duplicate,
+        bonus,
         creature: { id: creature.id, name: creature.name, tier: creature.tier },
     });
 });

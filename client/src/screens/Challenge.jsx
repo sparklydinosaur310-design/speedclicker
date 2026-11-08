@@ -166,6 +166,7 @@ export default function Challenge({ avatar }) {
                         tier={result.tier}
                         creature={result.creature}
                         duplicate={result.duplicate}
+                        bonus={result.bonus}
                         />
                         </>
                     ) : (

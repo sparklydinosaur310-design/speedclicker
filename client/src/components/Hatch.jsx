@@ -4,7 +4,7 @@ import Creature from './Creature.jsx';
 import biomes from '../../../shared/data/biomes.json';
 import './Hatch.css';
 
-export default function Hatch({ tier, creature, duplicate }) {
+export default function Hatch({ tier, creature, duplicate, bonus = 0 }) {
     const [phase, setPhase] = useState('shake');
 
     useEffect(() => {
@@ -38,7 +38,9 @@ export default function Hatch({ tier, creature, duplicate }) {
                     {biomes.tiers[creature.tier].label} {creature.name.toUpperCase()}
                 </span>
             </p>
-            {duplicate && <p>YOU ALREADY HATCHED THIS.</p>}
+            {duplicate && (
+                <p>YOU ALREADY HATCHED THIS. +{bonus.toLocaleString()} COINS</p>
+            )}
         </div>
     );
 }
