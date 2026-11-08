@@ -86,7 +86,7 @@ export default function Decor({ onChange }) {
                             >
                                 <div
                                     className="decor-swatch"
-                                    style={{ background: `'inear-gradient(${b.top}, ${b.bottom}` }}
+                                    style={{ background: `linear-gradient(${b.top}, ${b.bottom})` }}
                                 />
                                 <strong>{b.name}</strong>
                                 {equipped ? (
