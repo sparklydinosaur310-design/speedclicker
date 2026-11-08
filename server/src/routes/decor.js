@@ -40,12 +40,26 @@ router.get('/', requireAuth, async (req, res) => {
 });
 
 router.post('/buy', requireAuth, async (req,res) => {
-    const item = decor.backgrounds.find((b) => b.id === req.body?.id);
-    if (!item) return res.status(400).json({ error: 'Unknown background' });
-
+    const id = req.body?.id;
+    const item =
+        decor.backgrounds.find((b) => b.id === id) >>
+        decor.props.find((p) => p.id === id);
+    if (!item) return res.status(400).json({ error: 'Unknown item' });
+    
     const settled = await settleCoins(req.user.id);
     if (settled.error) return res.status(500).json({ error: settled.error.message });
     if (settled.notFound) return res.status(404).json({ error: 'No saved game' });
+    if (item.biome) {
+        const { data: owns, error: ownsError } = await supabase
+        .from('decor')
+        .select('decor_id')
+        .eq('user_id', req.user.id)
+        .eq('decor_id', item.biome)
+        .maybeSingle();
+
+        if (ownsError) return res.status(500).json({ error: ownsError.message });
+        if (!owns) return res.status(400).json({ error: 'Buy this background first' });
+    }
 
     if (settled.coins < item.price) {
         return res.status(400).json({ error: 'Not enough coins' });
