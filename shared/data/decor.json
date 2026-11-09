@@ -30,6 +30,12 @@
         { "id": "volcano-obsidian", "biome": "volcano", "name": "Obsidian Shards", "price": 90000, "x": 90, "y": 10, "scale": 6 },
         { "id": "volcano-tree", "biome": "volcano", "name": "Charred Tree", "price": 110000, "x": 8, "y": 14, "scale": 7 },
         { "id": "volcano-cone", "biome": "volcano", "name": "Volcano", "price": 115000, "x": 32, "y": 22, "scale": 8 },
-        { "id": "volcano-moon", "biome": "volcano", "name": "Blood Moon", "price": 125000, "x": 80, "y": 68, "scale": 6 }
+        { "id": "volcano-moon", "biome": "volcano", "name": "Blood Moon", "price": 125000, "x": 80, "y": 68, "scale": 6 },
+        { "id": "ocean-clam", "biome": "ocean", "name": "Giant Clam", "price": 225000, "x": 88, "y": 6, "scale": 8 },
+        { "id": "ocean-chest", "biome": "ocean", "name": "Treasure Chest", "price": 250000, "x": 72, "y": 6, "scale": 7 },
+        { "id": "ocean-coral", "biome": "ocean", "name": "Coral", "price": 325000, "x": 56, "y": 5, "scale":7 },
+        { "id": "ocean-kelp", "biome": "ocean", "name": "Kelp Forest", "price": 350000, "x": 8, "y": 12, "scale": 7 },
+        { "id": "ocean-ship", "biome": "ocean", "name": "Shipwreck", "price": 435000, "x": 32, "y": 18, "scale": 7 },
+        { "id": "ocean-bubbles", "biome": "ocean", "name": "Bubbles", "price": 545000, "x": 80, "y": 55, "scale": 6 }
     ]
 }
