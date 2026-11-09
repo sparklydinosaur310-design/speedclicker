@@ -24,6 +24,12 @@
         { "id": "tundra-snowman", "biome": "tundra", "name": "Snowman", "price": 22000, "x": 52, "y": 10, "scale": 7 },
         { "id": "tundra-pine", "biome": "tundra", "name": "Snowy Pine", "price": 24500, "x": 10, "y": 14, "scale": 7 },
         { "id": "tundra-igloo", "biome": "tundra", "name": "Igloo", "price": 28000, "x": 30, "y": 20, "scale": 8 },
-        { "id": "tundra-moon", "biome": "tundra", "name": "Crescent Moon", "price": 34500, "x": 80, "y": 68, "scale": 6 }
+        { "id": "tundra-moon", "biome": "tundra", "name": "Crescent Moon", "price": 34500, "x": 80, "y": 68, "scale": 6 },
+        { "id": "volcano-brazier", "biome": "volcano", "name": "Brazier", "price": 60000, "x": 74, "y": 8, "scale": 7 },
+        { "id": "volcano-lava", "biome": "volcano", "name": "Lava Pool", "price": 67000, "x": 56, "y": 5, "scale": 7 },
+        { "id": "volcano-obsidian", "biome": "volcano", "name": "Obsidian Shards", "price": 90000, "x": 90, "y": 10, "scale": 6 },
+        { "id": "volcano-tree", "biome": "volcano", "name": "Charred Tree", "price": 110000, "x": 8, "y": 14, "scale": 7 },
+        { "id": "volcano-cone", "biome": "volcano", "name": "Volcano", "price": 115000, "x": 32, "y": 22, "scale": 8 },
+        { "id": "volcano-moon", "biome": "volcano", "name": "Blood Moon", "price": 125000, "x": 80, "y": 68, "scale": 6 }
     ]
 }
