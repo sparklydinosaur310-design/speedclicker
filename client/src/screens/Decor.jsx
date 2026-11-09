@@ -3,6 +3,7 @@ import { apiFetch } from '../api/api.js';
 import decor from '../../../shared/data/decor.json';
 import './Decor.css';
 import Room from '../components/Room.jsx';
+import RoomScene from '../components/RoomScene.jsx';
 
 export default function Decor({ onChange }) {
     const [data, setData] = useState(null);
@@ -65,16 +66,8 @@ export default function Decor({ onChange }) {
             {!data && !error && <p>LOADING...</p>}
             {data && (
                 <>
-                <div
-                className="decor-preview"
-                style={{
-                    background: shown
-                    ? `linear-gradient(${shown.top}, ${shown.bottom})`
-                    : '#16213e'
-                }}
-                >
-                    <span className="decor-label">{shown ? shown.name : 'NO BACKGROUND'}</span>
-                </div>
+
+                <RoomScene biomeId={preview} owned={data.owned} />
 
                 {data.background && (
                     <button
