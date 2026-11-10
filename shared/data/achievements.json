@@ -8,5 +8,7 @@
     { "id" : "desert-master", "name": "Desert Master", "descrption": "Hatch all 6 Desert creatures", "reward": 1000, "rule": { "type": "collect_biome", "biome": "desert" } },
     { "id": "tundra-master", "name": "Tundra Master", "description": "Hatch all 6 Tundra creatures", "reward": 4000, "rule": { "type": "collect_biome", "biome": "tundra" } },
     { "id": "volcano-master", "name": "Volcano Master", "description": "Hatch all 6 Volcano creatures", "reward": 12000, "rule": { "type": "collect_biome", "biome": "volcano" } },
-    { "id": "ocean-master", "name": "Ocean Master", "description": "Hatch all 6 Deep Ocean creatures", "reward": 30000, "rule": { "type": "collect_biome", "biome": "ocean" } }
+    { "id": "ocean-master", "name": "Ocean Master", "description": "Hatch all 6 Deep Ocean creatures", "reward": 30000, "rule": { "type": "collect_biome", "biome": "ocean" } },
+    { "id": "first-mythic", "name": "Mythic Find", "description": "Hatch 1 mythic creature", "reward": 3000, "rule": { "type": "collect_tier", "tier": "mythical", "count": 1 } },
+    { "id": "first-legendary", "name": "Legend Hatcher", "description": "Hatch 1 legendary creature", "reward": 15000, "rule": { "type": "collect_tier", "tier": "legendary", "count": 1 } }
 ]

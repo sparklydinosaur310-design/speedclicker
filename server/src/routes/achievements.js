@@ -16,6 +16,12 @@ function ruleMet(rule, ctx) {
         const have = biome.creatures.filter((c) => ctx.owned.has(c.id)).length;
         return have >= (rule.count ?? biome.creatures.length);
     }
+    if (rule.type === 'collect_tier') {
+        const have = biomes.biomes
+            .flatMap((b) => b.creatures)
+            .filter((c) => c.tier === rule.tier && ctx.owned.has(c.id)).length;
+        return have >= (rule.count ?? 1);
+    }
     return false;
 }
 
