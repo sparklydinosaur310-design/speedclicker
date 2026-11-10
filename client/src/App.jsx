@@ -13,7 +13,6 @@ import Collection from './screens/Collection.jsx';
 import CoinCounter from './components/CoinCounter.jsx';
 import Decor from './screens/Decor.jsx';
 import EggBanner from './components/EggBanner.jsx';
-import MusicToggle from './components/MusicToggle.jsx';
 import { startMusicOnFirstClick } from './game/music.js';
 
 export default function App() {
@@ -136,8 +135,6 @@ export default function App() {
         onChangeAvatar={() => setScreen('avatar')}
         onLogout={() => supabase.auth.signOut()}
       />
-
-      <MusicToggle />
 
       <EggBanner hidden={screen === 'challenge'} onGo={() => setScreen('challenge')} />
 
