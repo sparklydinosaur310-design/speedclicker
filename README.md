@@ -11,7 +11,7 @@ In this game, you click to get speed and when you have enough speed you can chal
 
 I made this project because I remembered how addictive cookie clicker was and I wanted to create another web game that is similar to cookie clicker.
 
-## Tech Stack
+## Code
 
 This project was built using:
 
